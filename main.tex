@@ -1,0 +1,194 @@
+\documentclass[12pt,a4paper]{article}
+% these 3 make the hebrew work (ucs is from the culmus-latex package)
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,hebrew]{babel}
+% colors package with options to use color names in english
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{color}
+% standard package for math symbols and equations
+\usepackage{amsmath}
+\usepackage{amssymb}
+% package to change the page layout
+\usepackage[margin=2cm]{geometry}
+% package for footers and headers
+\usepackage{fancyhdr}
+%package for enumerate
+\usepackage{enumitem}
+%defining new list for questions
+\newlist{questions}{enumerate}{1}
+\setlist[questions]{label*=\textcolor{BurntOrange}{שאלה \arabic*: }}
+% package for images
+\usepackage{graphicx}
+% paragraph indentation removal
+\setlength{\parindent}{0pt}
+
+%%%%%%%% macros %%%%%%%%
+% course name, homework number, lecturer, 
+% tutorer, hebrew date, due date
+% definitions, theorem, examples, notes
+% questions, solutions
+\newcommand{\minititle}[1]{\par \bigskip \begingroup{\Large{\textbf{\underline{#1}}}}\endgroup \par \bigskip} 
+\newcommand{\coursename}{מבני נתונים}
+\newcommand{\semester}{סמסטר ב' תשע"ח}
+\newcommand{\definition}{\textcolor{Violet}{\textit{הגדרה.}} }
+\newcommand{\example}{\textcolor{OliveGreen}{\textit{דוגמא. }}}
+\newcommand{\assistant}{נתן ולהיימר}
+\newcommand{\lecturer}{אורן וימן}
+\newenvironment{solution}{\textcolor{ForestGreen}{\textit{פיתרון:}} \\ \small}
+
+\begin{document} 
+
+% setting up footer and header
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0cm}
+\fancyfoot{}
+\fancyfoot[RE,RO]{\thepage}
+% setting up the title
+\begin{titlepage}
+\begin{Large}
+מספר תעודת זהות: \underline{\hspace{4cm}}
+\end{Large}
+\bigskip
+\par
+\begin{huge}
+  \bf
+  אוניברסיטת חיפה  \hfill
+  החוג למדעי המחשב \par
+  \semester \hfill 8102/5/3
+  \par
+  \begin{center}
+  \coursename \\
+  בחינת אמצע
+  \end{center}
+\end{huge}
+\Large
+\textbf{מרצה:} \lecturer
+\\
+\textbf{מתרגל:} \assistant
+\par
+\bigskip
+\textbf{משך הבחינה:} שעה וחצי \\
+\textbf{חומר עזר:} דף \L{A4} כתוב/מודפס משני צדדיו.
+\par
+\bigskip
+\textbf{הנחיות:}
+\begin{itemize}
+\item עליכם לכתוב את התשובות על הטופס ולהגיש את כל הטופס ואת הטופס בלבד.
+\item היציאה מהכיתה במהלך הבחינה אסורה.
+\item קראו היטב כל שאלה וודאו שאתם מבינים אותה לפני שאתם מתחילים לענות עליה. אם יש שאלות, פנו למרצה.
+\item כתבו בכתב יד ברור וקריא. ניתן לכתוב בעיפרון.
+\end{itemize}
+\textbf{מבנה הבחינה:}
+\bigskip
+\par
+\begin{tabular}{ | c | c | c | }
+\hline \R{נקודות} & \R{מספר סעיפים} & \R{שאלה} \\ \hline 
+40 & 4 & 1 \\ \hline
+60 & 3 & 2 \\ \hline
+\end{tabular}
+\vfill
+\centering
+\huge
+\bf
+בהצלחה !
+\vfill
+\end{titlepage} 
+\newpage
+
+\begin{Large}
+\bf\underline{שאלה 1:} נכון / לא נכון \quad )כל סעיף 01 נקודות(
+\end{Large}
+\par
+על כל אחת מהשאלות הקיפו נכון או לא נכון \underline{ונמקו את בחירתכם}. על הנימוק להיות קצר אך קולע.
+\begin{itemize}
+\item[א.] נכון / לא נכון\\
+לכל שתי פונקציות חיוביות $f(n) , g(n)$: או ש $f(n) = O( g(n) )$ או ש $g(n) = O( f(n) )$.\\
+\begin{solution}
+ לא נכון. דוגמא נגדית: $f(n) = n$ ו $g(n)$ היא פונקציה המוגדרת
+\L{
+\[ 
+g(n ) = \begin{cases} 
+1 & \text{n even} \\
+n^2 & \text{n odd}
+\end{cases}
+\]
+}
+\end{solution}
+\item[ב.] נכון / לא נכון\\
+בהינתן $m$ עצי \L{AVL} מגודל $k$ כל אחד, הנתונים ברשימה $T_1 \leftrightarrow T_2 \leftrightarrow \cdots \leftrightarrow T_m$ ואשר מקיימים $T_1 < T_2 \cdots < T_m$ )כל המפתחות ב $T_{i-1}$ קטנים מכל המפתחות ב $T_{i}$(, אפשר לבצע הכנה ב $O(m)$ זמן כך שניתן יהיה לחפש איבר ב $O(\log m + \log k)$ זמן. \\
+\begin{solution}
+נכון. הסבר: בתור הכנה נבנה מערך ממוין בגודל $m$ מהמפתחות של שורשי העצים. כדי לחפש מספר $x$, נחפש קודם עץ במערך לפי $x$, ואז נחפש את $x$ בשלושה עצים: העץ שהגענו אליו, הקודם לו והעוקב לו. אם $x$ נמצא במבנה אז הוא חייב להימצא באחד מהם. סיבוכיות: $O( \log m + \log k )$ שזה הזמן לחפש במערך ואז הזמן לחפש בעצים.
+\end{solution}
+\item[ג.] נכון / לא נכון\\
+אם במימוש עץ \L{2-3} המתכנת עשה טעות וכעת הזמן לפיצול צומת בעץ לוקח $\Theta( \log n)$ זמן במקום $O(1)$ זמן )כאשר $n$ זה מספר האיברים הנוכחי בעץ(, אז הזמן לבצע סדרה של $m$ הכנסות מספרים שונים לעץ שמתחיל ריק, הוא כעת $\Omega( m \log^2 m )$.\\
+\begin{solution}
+לא נכון. הסבר: הזמן לבצע $m$ הכנסות בעץ \L{2-3} \textbf{רגיל} הוא $O( m \log m )$. מכיוון שמספר הפיצולים בכל הכנסה הוא $O(1)$ משוערך )ניקח כפוטנציאל את מספר הצמתים מדרגה $3$ כפול $\log n$(, אז יש $O(m)$ פיצולים בסך הכל. לכן שגיאת המימוש מוסיפה לכל היותר $O( m \log m )$ פעולות ולכן הזמן הוא עדיין $O( m \log m )$.
+\end{solution}
+\item[ד.]נכון / לא נכון\\
+ בעץ מושרש עם $n$ צמתים שבו לכל צומת פנימי יש בדיוק $3$ בנים, אם סכום גדלי תתי העצים של כל שני אחים הוא לפחות כגודל תת העץ של האח השלישי, אז גובה העץ כולו הוא $O( \log n )$. \\
+\begin{solution}
+נכון. הוכחה: מכיוון שבין כל שלושה אחים יש אח עם $n/3$ צמתים לפחות אז האח השני בגודלו הוא לפחות בגודל $n/6$, כי סכום הגדלים של העצים הקטנים הוא לפחות הגודל של העץ הגדול. לכן בכל רמה בעץ, כמות הצמתים יורדת בפאקטור של $\frac{1}{6}$ לפחות ולכן הגובה הוא $O( \log n )$.
+\end{solution}
+\end{itemize}
+\newpage
+
+\begin{Large}
+\bf \underline{שאלה 2:} תכנון מבנה נתונים \quad )כל סעיף 02 נקודות(
+\end{Large}
+\bigskip
+\par למגדל פיקוח בשדה תעופה דרוש מבנה נתונים לבעיה הבאה. \\ בכל פעם שנכנס מטוס חדש לתחום של מגדל הפיקוח, מבנה הנתונים מקבל כקלט מהרדאר זוג $(I , Dist )$ שמתאים למטוס שנכנס, כאשר:
+\begin{enumerate}
+\item $I$ הוא מספר מזהה ייחודי של המטוס.
+\item $Dist$ הוא המרחק במטרים של המטוס ממגדל הפיקוח )לא בהכרח ייחודי(.
+\end{enumerate}
+בכל פעם שיוצא מטוס מהתחום של מגדל הפיקוח, מבנה הנתונים מקבל כקלט מהרדאר את המספר המזהה $I$ של המטוס שיצא מהתחום.
+\par
+על מבנה הנתונים לתמוך בפעולות הבאות:
+\begin{enumerate}
+\item  הוסף מטוס חדש למבנה בעל מספר מזהה $I$ ומרחק $Dist$. 
+\item מחק מטוס קיים בעל מספר מזהה $I$ מהמבנה.
+\item בהינתן מספר מזהה $I$, מה המרחק של המטוס בעל מספר מזהה זה ממגדל הפיקוח. אם המטוס לא נמצא, הוצא הודעת שגיאה.
+\item בהינתן שני מספרים ממשיים $r_1 < r_2$, מי הוא המטוס בעל המספר מזהה המקסימלי שנמצא במרחק לפחות $r_1$ ולכל היותר $r_2$ ממגדל הפיקוח. אם אין כזה, הוצא הודעת שגיאה.
+\end{enumerate}
+\begin{itemize}[leftmargin=*]
+\item[א.] תכננו מבנה נתונים מתאים לבעיה זו. נתחו את סיבוכיות הזמן של הפעולות במונחים של: $n$ \L{-} מספר המטוסים השונים, $k$ \L{-} מספר המרחקים השונים.
+\item[ב.] כיצד תשובתכם לסעיף א' תשתנה, אם ידוע שכל המספרים המזהים הם מספרים טבעיים בני $10$ ספרות? כיצד היא תשתנה אם ידוע שהמרחקים הם מספרים טבעיים בני $10$ ספרות?
+\item[ג.] ידוע כי המרחק של מטוס הוא מספר טבעי בן $10$ ספרות, אך המספרים המזהים הם כלשהם )ממשיים(. \\
+יש לתמוך בפעולה הבאה: בהינתן שני מספרי זיהוי $i<j$, הקטן ב $1$ את המרחק של כל המטוסים שמספר המזהה שלהם הוא בין $i$ ל $j$ )כולל(. אם המרחק של מטוס הופך להיות $0$, צריך למחוק אותו מהמבנה. \\
+תכננו מחדש את המבנה ונתחו את סיבוכיות הזמן הגרוע ביותר והזמן המשוערך לכל אחת מהפעולות.
+\end{itemize}
+\newpage
+\begin{center}סעיף א'\end{center}
+\begin{solution}
+\textbf{נתחזק:} עץ \L{AVL} שהמפתח בו הוא המרחקים הקיימים, עץ \L{AVL} בכל קודקוד שהמפתח בו הוא מספרים מזהים של מטוסים בעלי אותו מרחק ועץ \L{AVL} נוסף ששהמפתח בו הוא המספרים המזהים ובכל קודקוד רשום המרחק של המטוס.
+בנוסף, בכל קודקוד נשמור שני שדות מקסימום: מספר מזהה מקסימלי של מטוסים בעלי אותו מרחק ומספר מזהה מקסימלי בתת העץ המושרש בקודקוד זה. נקרא להם מקסימום לוקאלי ומקסימום גלובאלי בהתאם.
+\par
+\textbf{ביצוע הפעולות:}
+\begin{itemize}
+\item הכנסה: מכניסים לעץ הראשון לפי המרחק ואז לעץ השני לפי המספר המזהה. מעדכנים שדות מקסימום בדרך חזרה לשורש לפי הכלל:
+\[
+global\_max(v) = \max \{ local\_max(v), global\_max(v.left), global\_max(v.right) \}
+\]
+בנוסף מכניסים את המטוס לעץ השלישי לפי המספר המזהה בלבד. סיבוכיות $O( \log n )$
+\item הוצאה: אותו דבר רק שמוחקים במקום מכניסים. סיבוכיות $O( \log n )$
+\item חיפוש: מחפשים לפי $I$ בעץ השלישי ומחזירים את המרחק שלו. סיבוכיות $O( \log n )$
+\item שאילתת טווח: מחפשים את $r_1$ ואז את $r_2$ ולוקחים את המקסימום של כל המקסימומים הגלובליים בקודקודים שנמצאים בטווח $[r_1 , r_2 ]$. סיבוכיות $O( \log k )$
+\end{itemize}
+\end{solution}
+\begin{center} סעיף ב' \end{center}
+\begin{solution}
+אם המספר המזהה הוא מספר טבעי בן $10$ ספרות אז נשתמש באותו מבנה, והסיבוכיות היא כעת $O(1)$ לכל הפעולות כי $k \leq n \leq 10^{10}$. אם המרחק הוא מספר טבעי בן $10$ ספרות, נשתמש גם באותו מבנה וכעת $k$ הוא קבוע אז הפעולה הרביעית לוקחת $O(1)$ ושאר הפעולות לוקחות $O( \log n )$.
+\end{solution}
+\begin{center} סעיף ג' \end{center}
+\begin{solution}
+נשתמש באותו מבנה, ואת הפעולה החדשה נבצע כך:\\
+נחפש את $i$ ואת $j$ ואז ונעבור על כל המטוסים בטווח ונקטין להם את המרחק ב $1$. לכל מטוס שנמצא בטווח הזה נלך גם לעץ ששומר את המרחקים ונעדכן בו את הקודקודים המתאימים )נמחק מטוס במרחק $Dist$ ונוסיף מטוס במרחק $Dist-1$(.\\
+סיבוכיות: במקרה הגרוע $O(n \log n )$ כי נצטרך לעדכן לכל המטוסים את המרחק, אבל מכיוון שאפשר להקטין לכל מטוס את המרחק מספר קבוע של פעמים, יוצא שהזמן המשוערך הוא $O( \log n )$. ניקח כפוטנציאל את:
+\[
+\phi = \left(\sum\limits_{i=1}^n dist(p_i) \right) \cdot \log n 
+\]
+כאשר $p_i$ הוא המטוס ה $i$ ו $dist$ זה המרחק שלו. בניתוח לפי פוטנציאל זה, אכן מקבלים שהזמן המשוערך הוא $O( \log n )$ )שזה רק הזמן הדרוש לחיפוש $i$ ו $j$(.
+\end{solution}
+\end{document}

@@ -1,0 +1,75 @@
+\documentclass[12pt,a4paper]{article}
+% these 3 make the hebrew work (ucs is from the culmus-latex package)
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,hebrew]{babel}
+% colors package with options to use color names in english
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{color}
+% standard package for math symbols and equations
+\usepackage{amsmath}
+\usepackage{amssymb}
+% package to change the page layout
+\usepackage[margin=2cm]{geometry}
+% package for footers and headers
+\usepackage{fancyhdr}
+%package for enumerate
+\usepackage{enumitem}
+%defining new list for questions
+\newlist{questions}{enumerate}{1}
+\setlist[questions]{label*=\textcolor{BurntOrange}{שאלה \arabic*: }}
+% package for images
+\usepackage{graphicx}
+% paragraph indentation removal
+\setlength{\parindent}{0pt}
+%
+\usepackage{listings}
+%%%%%%%% macros %%%%%%%%
+% course name, homework number, lecturer, 
+% tutorer, hebrew date, due date
+% definitions, theorem, examples, notes
+% questions, solutions
+\newcommand{\bluetitle}[1]{\par \bigskip \begingroup \textcolor{MidnightBlue}{\Large{\textbf{\underline{#1}}}}\endgroup \par \bigskip} 
+\newcommand{\coursename}{מבני נתונים}
+\newcommand{\hebrewdate}{סמסטר ב' תשע"ח}
+\newcommand{\definition}{\textcolor{Violet}{\textit{הגדרה.}} }
+\newcommand{\example}{\textcolor{OliveGreen}{\textit{דוגמא. }}}
+\newenvironment{solution}{\\ \textcolor{ForestGreen}{\textit{פיתרון:}} \\ \small}
+
+\begin{document} 
+
+% setting up footer and header
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0cm}
+\fancyfoot{}
+\fancyfoot[RE,RO]{\thepage}
+% setting up the title
+\begingroup 
+\color{BrickRed}
+\centering
+  \huge \textbf{\coursename}\\[0.1cm]
+\endgroup
+
+%body
+\bluetitle{שאלות נכון לא נכון}
+\begin{questions}
+\item לכל $B \geq 2$, גובה ה \L{B-tree} )עץ \L{B} שבו לכל צומת יש בין $B$ ל $\lceil B/2 \rceil$ ילדים( הוא $O( \log n ) $.
+\item כל אלגוריתם מיון מבוסס השוואות דורש $\Omega( \sqrt{n} )$ השוואות.
+\item אם במבנה נתונים כלשהו מתקיים שכל פעולה $op$ במבנה הנתונים $Time(op) = O(f(n) )$, אז לכל פונקציית פוטנציאל אי-שלילית $\phi$ המקיימת $\phi(D_0 ) = 0$, מתקיים כי $amort( op ) = O( f(n) )$.
+\item בעץ \L{AVL}, אם במקום לדרוש שהבדל הגבהים בין כל שני ילדים יהיה לכל היותר $1$ היינו דורשים שהוא יהיה לכל היותר $2$, אז כבר אי אפשר היה לומר שגובה העץ הוא $O( \log n )$.
+\item בעץ \L{AVL}, הבדלי הגבהים בין כל שני אחים הם לכל היותר $1$, אך הבדל הגבהים בין שני בני דודים מדרגה ראשונה יכול להיות גדול מ $2$.
+\item אם במימוש \L{mergesort} המתכנת עשה טעות וכעת האלגוריתם \L{merge(A,B)} רץ בזמן $\Theta( mn )$ )במקום $O(n+m)$(, אז כעת סיבוכיות הזמן של \L{mergesort} היא $\Omega(n^2 \log n)$.
+\item יהיו $f(n), g(n)$ פונקציות חיוביות. אם $\Omega( f(n) ) \subseteq \Omega( g(n) )$ אז $g(n) = O( f(n) )$.
+\item לכל $r>1$ טבעי, נוסחת הנסיגה $T(n) = 2T( \sqrt[r]{n} ) + O(1)$ מקיימת $T(n) = \Theta( (\log n) ^ {\log_r 2} )$.
+\item לכל $c>1$, הנוסחה $T(n) = \sum\limits_{i=0}^{log_2 log_2 n } c^i$ מקיימת $T(n) = \Theta( \log n )$.
+\item כל עץ חיפוש בינארי בגובה $2 \log n$ או פחות הוא גם עץ \L{AVL}.
+\item באלגוריתם לבניית עץ חיפוש מאוזן ממערך ממוין, אם במקום לקבוע את אמצע המערך להיות השורש של $T_1$ ו $T_2$ )העץ השמאלי והעץ הימני שמתקבלים ברקורסיה(, היינו מפעילים פעולת $concatenate(T_1 , A[n/2] , T_2 )$ ומחזירים את התוצאה, אז האלגוריתם היה פולט עץ $AVL$ וסיבוכיות הזמן שלו הייתה $O(n)$.
+\item לשני עצי \L{AVL} עם $n$ קודקודים כל אחד, יכולים להיות גבהים הנבדלים ביותר מ 1.
+\item המערך הבא: $[blablabla]$ הוא ערימת מקסימום בינארית.
+\item קיימת ערימה בינארית שאם עוברים עליה ב \L{PreOrder} מקבלים מערך ממוין.
+\item ב \L{Splay Tree}, מחיקה תמיד גורמת להקטנת הפוטנציאל.
+\item במבנה נתונים \L{Union-Find}, ה \L{rank} של צומת מהווה חסם עליון על הגובה שלו.
+\item ב \L{Splay Tree}, הראו היכן ניתוח הסיבוכיות היה משתבש לו היינו מגדירים $r(x) = \log \log (s(x) )$.
+\end{questions}
+\end{document}
